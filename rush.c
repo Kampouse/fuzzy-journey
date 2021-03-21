@@ -2,26 +2,43 @@
 #include "stdio.h"
 
 
+int parsinginput(char *input,int *value)
+	{
+		int i;
+		int j;
+
+		i = 0;
+		j = 0;
+		while (*input)
+		{	
+			if(i % 2 == 0 && *input > '0' && *input < '5')
+			{
+			   value[j] = *input - '0';
+			j++;		
+			}
+			i++;
+			input++;
+		}
+		if(j != 16)
+		{
+			return (-1);
+		}
+	return *value;
+	}
 int main(int argc, char *argv[])
 {
-char *cat;
-int i = 0;
-int j = 0;
-int value[16];
-cat = argv[1];
-//we could change the param of the if to allow bigger value
-//with a argv param...
-//we could pass ir as a param too...
-while(*cat)
-{
-    if(i % 2 == 0 && *cat > '0' && *cat < '5')
-    {
-       value[j] = *cat - '0';
-      printf("%d",value[j]);
-      j++;
-    }
-    cat++;
-    i++;
+	char *copy;
+	
+	int value[16];
+		if(argc == 2)
+		{
+			copy = argv[1];
+			parsinginput(copy,value); 
+		}
+		else
+		{
+		write(1,"error",5);
+		}
 }
 
-}
+
